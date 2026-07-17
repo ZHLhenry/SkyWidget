@@ -13,6 +13,9 @@ class SkyWidgetApplication : Application(){
 
     override fun onCreate() {
         super.onCreate()
-        SkyIconFontsLib.initRegister(this, "fonts/testSky_iconfont.ttf")
+        SkyIconFontsLib.initRegister(this, listOf(
+            "fonts/testSky_iconfont.ttf",
+            "fonts/adb_iconfont.ttf"
+        ))
     }
 }

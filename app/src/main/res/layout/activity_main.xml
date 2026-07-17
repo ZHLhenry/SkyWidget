@@ -86,41 +86,162 @@
             android:textSize="12sp" />
     </LinearLayout>
 
-    <!-- IconFont 演示区域 -->
-    <LinearLayout
+    <!-- IconFont 多字体演示区域 -->
+    <ScrollView
         android:id="@+id/iconFontSection"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/badgeSection">
+        app:layout_constraintTop_toBottomOf="@id/badgeSection"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:text="IconFont 图标字体演示"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvIconFont"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
             android:gravity="center"
-            android:textSize="24sp"
-            tools:text="图标示例" />
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <ImageView
-            android:id="@+id/ivIconFont"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="12dp"
-            tools:src="@drawable/ic_nav_home" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:text="IconFont 多字体演示"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <!-- 场景1: style() 多字体混用 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"
+                android:text="场景1: style() 多字体混用"
+                android:textColor="#FF6200EE"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvMultiFontStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#F5F5F5"
+                android:gravity="center"
+                android:padding="12dp"
+                android:textSize="24sp"
+                tools:text="多字体混用" />
+
+            <!-- 场景2: drawable() 默认字体 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"
+                android:text="场景2: drawable() 默认字体 (testSky)"
+                android:textColor="#FF6200EE"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivDefaultFont"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                tools:src="@drawable/ic_nav_home" />
+
+            <!-- 场景3: drawable() 指定字体 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"
+                android:text="场景3: drawable() 指定字体 (adb)"
+                android:textColor="#FF6200EE"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/ivSpecifiedFont"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                tools:src="@drawable/ic_nav_home" />
+
+            <!-- 场景4: getFormattedIconName() 指定字体 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"
+                android:text="场景4: getFormattedIconName() 指定字体"
+                android:textColor="#FF6200EE"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvFormattedName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#F5F5F5"
+                android:gravity="center"
+                android:padding="12dp"
+                android:textSize="24sp"
+                tools:text="指定字体图标" />
+
+            <!-- 场景5: 默认字体 sky_iconfont.ttf（不传 ttfPaths） -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"
+                android:text="场景5: 默认字体（initRegister 不传 ttfPaths）"
+                android:textColor="#FF6200EE"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvDefaultTtf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#F5F5F5"
+                android:gravity="center"
+                android:padding="12dp"
+                android:textSize="24sp"
+                tools:text="默认字体图标" />
+
+            <ImageView
+                android:id="@+id/ivDefaultTtf"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                tools:src="@drawable/ic_nav_home" />
+
+            <!-- 场景6: getRegisteredFonts() 列出所有字体 -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginTop="16dp"
+                android:text="场景6: getRegisteredFonts() 列出所有字体"
+                android:textColor="#FF6200EE"
+                android:textSize="13sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvFontList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:background="#F5F5F5"
+                android:padding="12dp"
+                android:textSize="13sp"
+                tools:text="字体列表" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <!-- 底部导航 -->
     <com.sky.widget.bottomNavigationView.SkyBottomNavigationView

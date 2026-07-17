@@ -34,7 +34,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         setupBadge()
-        setupIconFont()
+         setupIconFont() // 需注册自定义字体（testSky/adb）才能运行，当前未注册已注释
+//        setupDefaultIconFont() // 演示包内默认默认字体
         setupBottomNavigation()
     }
 
@@ -75,22 +76,69 @@ class MainActivity : AppCompatActivity() {
     }
 
     /**
-     * 演示 SkyIconFontsLib 的两种用法：
-     * 1. 在文本中嵌入图标
-     * 2. 创建图标 Drawable
+     * 演示 SkyIconFontsLib 多字体场景（需注册自定义字体）：
+     * 1. style() 多字体混用（按 prefix 自动路由）
+     * 2. drawable() 默认字体
+     * 3. drawable() 指定字体
+     * 4. getFormattedIconName() 指定字体
+     * 5. getRegisteredFonts() 列出所有字体
      */
     private fun setupIconFont() {
-        // 1. 在文本中嵌入图标（使用 formattedName）
-        val tvIconFont = findViewById<TextView>(R.id.tvIconFont)
-        val iconNames = listOf("testSkyshouye", "testSkyguangchang", "testSkyxiangmu", "testSkywode")
-        val iconText = iconNames.joinToString("  ") { name ->
-            SkyIconFontsLib.getFormattedIconName(name)
-        }
-        tvIconFont.text = SkyIconFontsLib.style(SpannableString(iconText))
+        // 场景1: style() 多字体混用
+        // testSky 的 mappingPrefix = "tes"，adb 的 mappingPrefix = "adb"
+        // Iconics 解析时取 {xxx} 前3个字符作为 fontKey 路由到对应字体
+        val tvMultiFontStyle = findViewById<TextView>(R.id.tvMultiFontStyle)
+        val mixedText = "${SkyIconFontsLib.getFormattedIconName("testSkyshouye")} " +
+                "${SkyIconFontsLib.getFormattedIconName("testSkyfenxiang")} " +
+                "${SkyIconFontsLib.getFormattedIconName("adbdingwei", "adb-iconfont")} " +
+                "${SkyIconFontsLib.getFormattedIconName("adbkefu1", "adb-iconfont")}"
+        tvMultiFontStyle.text = SkyIconFontsLib.style(SpannableString(mixedText))
 
-        // 2. 创建图标 Drawable 显示在 ImageView 中
-        val ivIconFont = findViewById<android.widget.ImageView>(R.id.ivIconFont)
-        ivIconFont.setImageDrawable(SkyIconFontsLib.drawable(this, "testSkyfenxiang"))
+        // 场景2: drawable() 默认字体（第一个注册的 testSky）
+        val ivDefaultFont = findViewById<android.widget.ImageView>(R.id.ivDefaultFont)
+        ivDefaultFont.setImageDrawable(SkyIconFontsLib.drawable(this, "testSkywode"))
+
+        // 场景3: drawable() 指定字体（adb）
+        val ivSpecifiedFont = findViewById<android.widget.ImageView>(R.id.ivSpecifiedFont)
+        ivSpecifiedFont.setImageDrawable(SkyIconFontsLib.drawable(this, "adbxie", "adb-iconfont"))
+
+        // 场景4: getFormattedIconName() 指定字体
+        val tvFormattedName = findViewById<TextView>(R.id.tvFormattedName)
+        val formattedText = "${SkyIconFontsLib.getFormattedIconName("testSkyguangchang")} " +
+                "${SkyIconFontsLib.getFormattedIconName("adbtixi", "adb-iconfont")}"
+        tvFormattedName.text = SkyIconFontsLib.style(SpannableString(formattedText))
+
+        // 场景5: getRegisteredFonts() 列出所有字体
+        val tvFontList = findViewById<TextView>(R.id.tvFontList)
+        val fontInfo = SkyIconFontsLib.getRegisteredFonts().joinToString("\n") { info ->
+            "字体: ${info.fontName} | prefix: ${info.mappingPrefix} | 图标数: ${info.iconCount}"
+        }
+        tvFontList.text = fontInfo
+    }
+
+    /**
+     * 演示 SkyIconFontsLib 使用包内默认字体：
+     * Application 中仅调用 SkyIconFontsLib.initRegister(this)，
+     * 自动 fallback 到包内默认字体 sky_iconfont.ttf，无需指定 fontName
+     */
+    private fun setupDefaultIconFont() {
+        // style() + getFormattedIconName()：无需指定 fontName
+        val tvDefaultTtf = findViewById<TextView>(R.id.tvDefaultTtf)
+        val defaultFontText = "${SkyIconFontsLib.getFormattedIconName("skyshouye")} " +
+                "${SkyIconFontsLib.getFormattedIconName("skywode")} " +
+                "${SkyIconFontsLib.getFormattedIconName("skyxiangmu")}"
+        tvDefaultTtf.text = SkyIconFontsLib.style(SpannableString(defaultFontText))
+
+        // drawable()：无需指定 fontName
+        val ivDefaultTtf = findViewById<android.widget.ImageView>(R.id.ivDefaultTtf)
+        ivDefaultTtf.setImageDrawable(SkyIconFontsLib.drawable(this, "skyguangchang"))
+
+        // getRegisteredFonts()：列出所有已注册字体
+        val tvFontList = findViewById<TextView>(R.id.tvFontList)
+        val fontInfo = SkyIconFontsLib.getRegisteredFonts().joinToString("\n") { info ->
+            "字体: ${info.fontName} | prefix: ${info.mappingPrefix} | 图标数: ${info.iconCount}"
+        }
+        tvFontList.text = fontInfo
     }
 
     /**
