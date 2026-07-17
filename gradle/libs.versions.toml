@@ -1,0 +1,42 @@
+[versions]
+agp = "9.3.0"
+coreKtx = "1.10.1"
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
+material = "1.10.0"
+activityKtx = "1.8.0"
+constraintlayout = "2.1.4"
+skymvvm = "1.2.0"
+buildLogic = "1.2.0"
+agpVersion = "9.2.1"
+kotlinGradlePlugin = "2.2.10"
+iconics = "5.5.0"
+skywidget = "1.1.0"
+
+[libraries]
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+iconics-core = { group = "com.mikepenz", name = "iconics-core", version.ref = "iconics" }
+
+skymvvm = { module = "com.sky.lib:SkyMVVM", version.ref = "skymvvm" }
+skywidget = { module = "com.sky.lib:SkyWidget", version.ref = "skywidget" }
+# Hilt
+hilt-noop-processor = { group = "com.sky.buildLogic", name = "hilt-noop-processor", version.ref = "buildLogic" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlinGradlePlugin" }
+
+[plugins]
+sky-android-application = { id = "sky.android.application", version.ref = "buildLogic" }
+sky-android-application-flavors = { id = "sky.android.application.flavors", version.ref = "buildLogic" }
+sky-android-hilt = { id = "sky.android.hilt", version.ref = "buildLogic" }
+android-library = { id = "com.android.library", version.ref = "agpVersion" }
+sky-android-publish = { id = "sky.android.publish", version.ref = "buildLogic" }
+sky-android-library = { id = "sky.android.library", version.ref = "buildLogic" }
+
